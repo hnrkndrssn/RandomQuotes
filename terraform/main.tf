@@ -89,6 +89,28 @@ resource "octopusdeploy_project" "BuildInfoDemo" {
     depends_on              = [octopusdeploy_project_group.BuildInfoDemo, octopusdeploy_git_credential.BuildInfoDemo, octopusdeploy_lifecycle.BuildInfoDemo]
 }
 
+resource "octopusdeploy_channel" "BuildInfoDemoDefaultChannel" {
+  name = "Default"
+  is_default = true
+  project_id = octopusdeploy_project.BuildInfoDemo.id
+  rule {
+    action_package {
+      deployment_action = "Deploy an Azure App Service"
+    }
+    tag = "^$"
+  }
+}
+
+resource "octopusdeploy_channel" "BuildInfoDemoPreReleaseChannel" {
+  name = "PreRelease"
+  project_id = octopusdeploy_project.BuildInfoDemo.id
+  rule {
+    action_package {
+      deployment_action = "Deploy an Azure App Service"
+    }
+    tag = "^[^\\+].*"
+  }
+}
 
 resource "octopusdeploy_project" "BuildInfoDemo2" {
     name                    = var.buildInfoProject2Name
@@ -103,4 +125,27 @@ resource "octopusdeploy_project" "BuildInfoDemo2" {
     }
 
     depends_on              = [octopusdeploy_project_group.BuildInfoDemo, octopusdeploy_git_credential.BuildInfoDemo, octopusdeploy_lifecycle.BuildInfoDemo]
+}
+
+resource "octopusdeploy_channel" "BuildInfoDemo2DefaultChannel" {
+  name = "Default"
+  is_default = true
+  project_id = octopusdeploy_project.BuildInfoDemo2.id
+  rule {
+    action_package {
+      deployment_action = "Deploy an Azure App Service"
+    }
+    tag = "^$"
+  }
+}
+
+resource "octopusdeploy_channel" "BuildInfoDemo2PreReleaseChannel" {
+  name = "PreRelease"
+  project_id = octopusdeploy_project.BuildInfoDemo2.id
+  rule {
+    action_package {
+      deployment_action = "Deploy an Azure App Service"
+    }
+    tag = "^[^\\+].*"
+  }
 }
