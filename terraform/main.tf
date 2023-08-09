@@ -58,13 +58,12 @@ resource "octopusdeploy_lifecycle" "BuildInfoDemo" {
     phase {
       name = octopusdeploy_environment.TestEnvironment.name
       optional_deployment_targets           = [octopusdeploy_environment.TestEnvironment.id]
-      minimum_environments_before_promotion = 1
+      is_optional_phase = true
     }
 
     phase {
       name = octopusdeploy_environment.ProdEnvironment.name
       optional_deployment_targets           = [octopusdeploy_environment.ProdEnvironment.id]
-      minimum_environments_before_promotion = 1
     }
 
     depends_on = [octopusdeploy_environment.DevEnvironment, octopusdeploy_environment.TestEnvironment, octopusdeploy_environment.ProdEnvironment]
