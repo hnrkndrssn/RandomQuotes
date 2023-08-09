@@ -57,7 +57,8 @@ jobs:
       uses: OctopusDeploy/push-package-action@v3
       env:
         OCTOPUS_API_KEY: ${{ secrets.OCTOPUS_API_TOKEN }}
-        OCTOPUS_HOST: ${{ secrets.OCTOPUS_SERVER_URL }}
+        OCTOPUS_URL: ${{ secrets.OCTOPUS_SERVER_URL }}
+        OCTOPUS_SPACE: 'Default'
       with:
         packages: artifacts/*.zip
         overwrite_mode: OverwriteExisting
@@ -66,13 +67,16 @@ jobs:
       env:
         OCTOPUS_API_KEY: ${{ secrets.OCTOPUS_API_TOKEN }}
         OCTOPUS_HOST: ${{ secrets.OCTOPUS_SERVER_URL }}
+        OCTOPUS_SPACE: 'Default'
       with:
         version: ${{ steps.determine_version.outputs.semVer }}
         packages: RandomQuotes
         overwrite_mode: OverwriteExisting
     - name: Create Octopus Release
       uses: OctopusDeploy/create-release-action@v3
+      env:
+        OCTOPUS_API_KEY: ${{ secrets.OCTOPUS_API_TOKEN }}
+        OCTOPUS_URL: ${{ secrets.OCTOPUS_SERVER_URL }}
+        OCTOPUS_SPACE: 'Default'
       with:
-        api_key: ${{ secrets.OCTOPUS_API_TOKEN }}
         project: RandomQuotes
-        server: ${{ secrets.OCTOPUS_SERVER_URL }}
