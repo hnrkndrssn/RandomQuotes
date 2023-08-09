@@ -88,3 +88,19 @@ resource "octopusdeploy_project" "BuildInfoDemo" {
 
     depends_on              = [octopusdeploy_project_group.BuildInfoDemo, octopusdeploy_git_credential.BuildInfoDemo, octopusdeploy_lifecycle.BuildInfoDemo]
 }
+
+
+resource "octopusdeploy_project" "BuildInfoDemo2" {
+    name                    = var.buildInfoProject2Name
+    project_group_id        = octopusdeploy_project_group.BuildInfoDemo.id
+    lifecycle_id            = octopusdeploy_lifecycle.BuildInfoDemo.id
+
+    git_library_persistence_settings {
+        default_branch      = var.buildInfoProjectGitSettingsBranch
+        git_credential_id   = octopusdeploy_git_credential.BuildInfoDemo.id
+        url                 = var.buildInfoProjectGitSettingsUrl
+        base_path           = var.buildInfoProject2GitSettingsBasePath
+    }
+
+    depends_on              = [octopusdeploy_project_group.BuildInfoDemo, octopusdeploy_git_credential.BuildInfoDemo, octopusdeploy_lifecycle.BuildInfoDemo]
+}
