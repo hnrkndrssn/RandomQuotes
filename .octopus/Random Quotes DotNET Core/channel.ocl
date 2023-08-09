@@ -1,4 +1,0 @@
-channels {
-    is_default = true
-    name = "Default"
-}

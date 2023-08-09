@@ -12,7 +12,7 @@ steps "deploy-an-azure-app-service" {
             Octopus.Action.Azure.DeploymentType = "Package"
             Octopus.Action.EnabledFeatures = "Octopus.Features.JsonConfigurationVariables,Octopus.Features.ConfigurationTransforms,Octopus.Features.SubstituteInFiles"
             Octopus.Action.Package.DownloadOnTentacle = "False"
-            Octopus.Action.Package.FeedId = "feeds-builtin"
+            Octopus.Action.Package.FeedId = "octopus-server-built-in"
             Octopus.Action.Package.PackageId = "randomquotes"
             Octopus.Action.RunOnServer = "true"
         }
@@ -21,7 +21,7 @@ steps "deploy-an-azure-app-service" {
 
         packages {
             acquisition_location = "Server"
-            feed = "feeds-builtin"
+            feed = "octopus-server-built-in"
             package_id = "randomquotes"
             properties = {
                 SelectionMode = "immediate"
