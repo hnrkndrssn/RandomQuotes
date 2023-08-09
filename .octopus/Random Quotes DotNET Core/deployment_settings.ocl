@@ -1,4 +1,9 @@
-deployment_changes_template = "#{Octopus.Deployment.ChangesMarkdown | MarkdownToHtml}"
+deployment_changes_template = <<-EOT
+        #{each change in Octopus.Deployment.Changes}
+        <h2>#{change.Version}</h2>
+        <p>#{change.ReleaseNotes | MarkdownToHtml}</p>
+        #{/each}
+        EOT
 release_notes_template = <<-EOT
         #{each package in Octopus.Release.Package}
         - #{package.PackageId} #{package.Version}
