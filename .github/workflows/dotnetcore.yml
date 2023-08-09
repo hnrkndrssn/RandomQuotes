@@ -79,4 +79,4 @@ jobs:
         OCTOPUS_URL: ${{ secrets.OCTOPUS_SERVER_URL }}
         OCTOPUS_SPACE: 'Default'
       with:
-        project: RandomQuotes
+        project: 'Build Info Demo'
