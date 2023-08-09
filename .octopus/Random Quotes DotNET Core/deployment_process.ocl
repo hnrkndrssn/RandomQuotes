@@ -1,10 +1,12 @@
-steps "Deploy an Azure App Service" {
+steps "deploy-an-azure-app-service" {
+    name = "Deploy an Azure App Service"
+
     properties = {
         Octopus.Action.TargetRoles = "webapp"
     }
 
 
-    actions "Deploy an Azure App Service" {
+    action {
         action_type = "Octopus.AzureAppService"
         properties = {
             Octopus.Action.Azure.DeploymentType = "Package"
