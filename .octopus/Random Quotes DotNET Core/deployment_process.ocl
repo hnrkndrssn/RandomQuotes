@@ -21,7 +21,7 @@ steps "deploy-an-azure-app-service" {
 
         packages {
             acquisition_location = "Server"
-            feed_id_or_name = "octopus-server-built-in"
+            feed = "octopus-server-built-in"
             package_id = "randomquotes"
             properties = {
                 SelectionMode = "immediate"
