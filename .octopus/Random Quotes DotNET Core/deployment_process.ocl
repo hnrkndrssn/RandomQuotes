@@ -17,7 +17,7 @@ steps "deploy-an-azure-app-service" {
             Octopus.Action.RunOnServer = "true"
         }
 
-        worker_pool_id_or_name = "Hosted Ubuntu"
+        worker_pool = "hosted-ubuntu"
 
         packages {
             acquisition_location = "Server"
