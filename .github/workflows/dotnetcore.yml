@@ -72,6 +72,7 @@ jobs:
         version: ${{ steps.determine_version.outputs.semVer }}
         packages: RandomQuotes
         overwrite_mode: OverwriteExisting
+        debug: true
     - name: Create Octopus Release
       uses: OctopusDeploy/create-release-action@v3
       env:
@@ -80,3 +81,4 @@ jobs:
         OCTOPUS_SPACE: 'Default'
       with:
         project: 'Build Info Demo'
+        git_ref: ${{ github.ref }}
