@@ -239,7 +239,7 @@ resource "octopusdeploy_project" "BuildInfoDemoTenanted2" {
         base_path = var.buildInfoProjectTenanted2GitSettingsBasePath
     }
 
-    depends_on = [ octopusdeploy_project_group.BuildInfoDemo, octopusdeploy_git_credential.BuildInfoDemo, octopusdeploy_lifecycle.BuildInfoDemo ]
+    depends_on = [ octopusdeploy_project_group.BuildInfoDemo, octopusdeploy_git_credential.BuildInfoDemo, octopusdeploy_lifecycle.BuildInfoDemo, octopusdeploy_project.BuildInfoDemoTenanted ]
 }
 
 resource "octopusdeploy_channel" "BuildInfoDemoTenanted2DefaultChannel" {
