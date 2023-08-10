@@ -1,0 +1,24 @@
+deployment_changes_template = <<-EOT
+        #{each change in Octopus.Deployment.Changes}
+        <h2>#{change.Version}</h2>
+        <p>#{change.ReleaseNotes | MarkdownToHtml}</p>
+        #{/each}
+            EOT
+release_notes_template = <<-EOT
+        #{each package in Octopus.Release.Package}
+        - #{package.PackageId} #{package.Version}
+        #{each commit in package.Commits}
+            - [#{commit.CommitId}](#{commit.LinkUrl}) - #{commit.Comment}
+        #{/each}
+        #{/each}
+            EOT
+
+connectivity_policy {
+    allow_deployments_to_no_targets = true
+}
+
+versioning_strategy {
+    donor_package {
+        step = "deploy-an-azure-app-service"
+    }
+}

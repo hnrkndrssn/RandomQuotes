@@ -74,6 +74,14 @@ variable "buildInfoProject2Name" {
     type = string
 }
 
+variable "buildInfoProjectTenantedName" {
+    type = string
+}
+
+variable "buildInfoProjectTenanted2Name" {
+    type = string
+}
+
 variable "buildInfoProjectGitSettingsBranch" {
     type = string
 }
@@ -88,4 +96,20 @@ variable "buildInfoProjectGitSettingsBasePath" {
 
 variable "buildInfoProject2GitSettingsBasePath" {
     type = string  
+}
+
+variable "buildInfoProjectTenantedGitSettingsBasePath" {
+    type = string  
+}
+
+variable "buildInfoProjectTenanted2GitSettingsBasePath" {
+    type = string  
+}
+
+variable "buildInfoTenantAName" {
+    type = string
+}
+
+variable "buildInfoTenantBName" {
+    type = string
 }
