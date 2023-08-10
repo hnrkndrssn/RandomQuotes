@@ -50,6 +50,10 @@ variable "buildInfoLifecycleName" {
     type = string  
 }
 
+variable "buildInfoLifecyclePreReleaseName" {
+    type = string
+}
+
 variable "buildInfoLifecycleRetentionPolicyQuantityToKeep" {
     type = number  
 }

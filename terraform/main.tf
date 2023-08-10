@@ -69,6 +69,28 @@ resource "octopusdeploy_lifecycle" "BuildInfoDemo" {
     depends_on = [octopusdeploy_environment.DevEnvironment, octopusdeploy_environment.TestEnvironment, octopusdeploy_environment.ProdEnvironment]
 }
 
+resource "octopusdeploy_lifecycle" "BuildInfoDemoPreRelease" {
+    name = var.buildInfoLifecyclePreReleaseName
+    
+    release_retention_policy {
+        quantity_to_keep    = var.buildInfoLifecycleRetentionPolicyQuantityToKeep
+        unit                = var.buildInfoLifecycleRetentionPolicyUnit
+    }
+
+    phase {
+      name = octopusdeploy_environment.DevEnvironment.name
+      automatic_deployment_targets = [octopusdeploy_environment.DevEnvironment.id]
+    }
+
+    phase {
+      name = octopusdeploy_environment.TestEnvironment.name
+      optional_deployment_targets           = [octopusdeploy_environment.TestEnvironment.id]
+      is_optional_phase = true
+    }
+
+    depends_on = [octopusdeploy_environment.DevEnvironment, octopusdeploy_environment.TestEnvironment]
+}
+
 resource "octopusdeploy_project_group" "BuildInfoDemo" {
     name = var.buildInfoProjectGroupName
 }
@@ -103,6 +125,7 @@ resource "octopusdeploy_channel" "BuildInfoDemoDefaultChannel" {
 resource "octopusdeploy_channel" "BuildInfoDemoPreReleaseChannel" {
   name = "PreRelease"
   project_id = octopusdeploy_project.BuildInfoDemo.id
+  lifecycle_id = octopusdeploy_lifecycle.BuildInfoDemoPreRelease.id
   rule {
     action_package {
       deployment_action = "Deploy an Azure App Service"
@@ -141,6 +164,7 @@ resource "octopusdeploy_channel" "BuildInfoDemo2DefaultChannel" {
 resource "octopusdeploy_channel" "BuildInfoDemo2PreReleaseChannel" {
   name = "PreRelease"
   project_id = octopusdeploy_project.BuildInfoDemo2.id
+  lifecycle_id = octopusdeploy_lifecycle.BuildInfoDemoPreRelease.id
   rule {
     action_package {
       deployment_action = "Deploy an Azure App Service"
